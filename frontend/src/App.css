@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=McLaren&family=Montserrat&display=swap');
+
+.App {
+    min-height: 100vh;
+    display: flex;
+    font-family: "Montserrat";
+}
+
+
+.texture4 {
+    background-image: url("./images/texture4.png");
+    background-color: #C5ECBE;
+    color: white;
+}
+
+/* Not to display scroll bar */
+::-webkit-scrollbar {
+    width: 0px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(136, 136, 136, 0.281);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb.hover {
+    backgroud: #555
+}
