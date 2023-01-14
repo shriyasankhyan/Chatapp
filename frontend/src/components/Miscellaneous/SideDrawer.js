@@ -2,23 +2,23 @@ import {
     Box, Tooltip, Button, Text, Menu, MenuButton,
     MenuList, MenuItem, Avatar, MenuDivider, Drawer, useDisclosure,
     DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Input,
-    useToast, Spinner
+    useToast
 } from '@chakra-ui/react';
+import { Spinner } from "@chakra-ui/spinner";
 import UserListItem from "../UserAvatar/UserListItem"
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import React, { useState } from 'react'
 import { ChatState } from '../../Context/ChatProvider';
 import ProfileModal from './ProfileModal';
 import { useNavigate } from 'react-router-dom';
+import ChatLoading from "../Chats/ChatLoading"
 import axios from "axios";
-import ChatLoading from '../Chats/ChatLoading';
-import { set } from 'mongoose';
 
 const SideDrawer = () => {
     const [search, setSearch] = useState("");
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [loadingChat, setLoadingChat] = useState();
+    const [loadingChat, setLoadingChat] = useState(false);
     const { user, setSelectedChat, chats, setChats } = ChatState();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const navigate = useNavigate();
@@ -76,7 +76,7 @@ const SideDrawer = () => {
 
             const data = await axios.post('/api/chat', { userId }, config);
 
-            if (!chats.find((c) => c._id === data._id)) {
+            if (!chats.find(c => c._id === data._id)) {
                 setChats([data, ...chats]);
             }
 
@@ -92,6 +92,7 @@ const SideDrawer = () => {
                 isClosable: true,
                 position: "bottom-left"
             });
+            setLoadingChat(false);
         }
     };
 
@@ -166,15 +167,15 @@ const SideDrawer = () => {
                                 <ChatLoading />
                             ) : (
 
-                                searchResult?.map(user => {
-                                    return <UserListItem
+                                searchResult?.map(user => (
+                                    <UserListItem
                                         key={user._id}
                                         user={user}
                                         handleFunction={() =>
                                             accessChat(user._id)
                                         }
                                     />
-                                })
+                                ))
                             )}
                             {loadingChat && <Spinner ml="auto" display="flex" />}
 
@@ -185,6 +186,6 @@ const SideDrawer = () => {
             </Drawer>
         </>
     )
-}
+};
 
-export default SideDrawer
+export default SideDrawer;

@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import { ChatState } from '../../Context/ChatProvider'
+import { ChatState } from '../Context/ChatProvider'
 import { Box, useToast, Button, Stack, Text } from "@chakra-ui/react";
 import { AddIcon } from '@chakra-ui/icons';
-import { getSender } from '../../config/ChatLogics';
+import { getSender } from "../config/ChatLogics"
 import axios from "axios";
-import ChatLoading from './ChatLoading';
+import ChatLoading from './Chats/ChatLoading'
+import asyncHandler from "express-async-handler";
+import GroupChatModal from './Miscellaneous/GroupChatModal';
 
-const MyChats = () => {
+const MyChats = ({ fetchAgain }) => {
     const [loggedUser, setLoggedUser] = useState();
     const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
 
     const toast = useToast();
 
-    const fetchChats = async () => {
+    const fetchChats = asyncHandler(async () => {
         try {
             const config = {
                 headers: {
                     Authorization: `Bearer ${user.token}`,
-                }
+                },
             };
 
             const { data } = await axios.get("/api/chat", config);
-            setChats(data);
+            setChats(data)
         } catch (error) {
             toast({
                 title: "Error occured!",
@@ -32,12 +34,12 @@ const MyChats = () => {
                 position: "bottom-left",
             });
         }
-    };
+    });
 
     useEffect(() => {
         setLoggedUser(JSON.parse(localStorage.getItem("userModel")));
         fetchChats();
-    }, []);
+    }, [fetchAgain]);
 
     return (
         <Box
@@ -47,7 +49,7 @@ const MyChats = () => {
             p={3}
             bg="white"
             w={{ base: "100%", md: "31%" }}
-            borderRadius="1g"
+            borderRadius="10px"
             borderWidth="1px"
         >
             <Box
@@ -61,13 +63,16 @@ const MyChats = () => {
                 alignItems="center"
             >
                 My Chats
-                <Button
-                    display="flex"
-                    fontSize={{ base: "17px", md: "10px", lg: "17px" }}
-                    rightIcon={<AddIcon />}
-                >
-                    New group Chat
-                </Button>
+                <GroupChatModal>
+
+                    <Button
+                        display="flex"
+                        fontSize={{ base: "17px", md: "10px", lg: "17px" }}
+                        rightIcon={<AddIcon />}
+                    >
+                        New group Chat
+                    </Button>
+                </GroupChatModal>
             </Box>
             <Box
                 display="flex"
@@ -76,7 +81,7 @@ const MyChats = () => {
                 bg="#F8F8F8"
                 w="100%"
                 h="100%"
-                borderRadius="1g"
+                borderRadius="10px"
                 overflowY="hidden"
             >
                 {chats ? (
@@ -89,7 +94,7 @@ const MyChats = () => {
                                 color={selectedChat === chat ? "white" : "black"}
                                 px={3}
                                 py={2}
-                                borderRadius="1g"
+                                borderRadius="10px"
                                 key={chat._id}
                             >
                                 <Text>
