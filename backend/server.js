@@ -8,6 +8,9 @@ const messageRoutes = require("./routes/messageRoutes");
 const app = express();
 const path = require('path');
 dotenv.config();
+var cors = require('cors')
+
+app.use(cors());
 
 
 connectDB();
@@ -47,7 +50,8 @@ const server = app.listen(PORT, console.log(`Server started on Port ${PORT}.`));
 const io = require("socket.io")(server, {
     pingTimeOut: 60000,
     cors: {
-        origin: process.env.ORIGIN
+        origin: process.env.ORIGIN,
+        credentials: false
     },
 });
 
