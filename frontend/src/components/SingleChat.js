@@ -224,8 +224,10 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                                 <Lottie
                                     options={defaultOptions}
                                     width={70}
-                                    style={{ marginBottom: 15, marginLeft: 0 }}
-                                />
+                                    style={{ marginBottom: 15, marginLeft: 0, justifyContent: 'center' }}
+                                >
+                                    <b>. . . . .</b>
+                                </Lottie>
 
                             </div> : <></>}
                             <Input
