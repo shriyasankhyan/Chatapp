@@ -7,6 +7,15 @@ const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 const messageRoutes = require("./routes/messageRoutes");
 const app = express();
 const path = require('path');
+const cors = require('cors');
+
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,            //access-control-allow-credentials:true
+    optionSuccessStatus: 200
+}
+app.use(cors(corsOptions));
+
 dotenv.config();
 connectDB();
 // To accept JSON data.
@@ -46,7 +55,6 @@ const io = require("socket.io")(server, {
     pingTimeOut: 60000,
     cors: {
         origin: process.env.ORIGIN,
-        credentials: false
     },
 });
 
