@@ -35,7 +35,7 @@ const GroupChatModal = ({ children }) => {
                 },
             };
 
-            const { data } = await axios.get(baseURL + `/api/user?search=${search}`, config);
+            const { data } = await axios.get(baseURL + `api/user?search=${search}`, config);
             setLoading(false);
             setSearchResult(data);
         } catch (error) {
@@ -69,7 +69,7 @@ const GroupChatModal = ({ children }) => {
 
                 },
             }
-            const { data } = await axios.post(baseURL + '/api/chat/group', {
+            const { data } = await axios.post(baseURL + 'api/chat/group', {
                 name: groupChatName,
                 users: JSON.stringify(selectedUsers.map(u =>
                     u._id))
