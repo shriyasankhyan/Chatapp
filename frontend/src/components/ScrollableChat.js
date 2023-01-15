@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { Avatar, Tooltip } from '@chakra-ui/react';
-import { isLastMessage, isSameSender, isSameSenderMargin } from '../config/ChatLogics';
+import { isLastMessage, isSameSender, isSameSenderMargin, isSameUser } from '../config/ChatLogics';
 import { ChatState } from '../Context/ChatProvider';
 
 const ScrollableChat = ({ messages }) => {
@@ -22,15 +22,11 @@ const ScrollableChat = ({ messages }) => {
                     key={m._id}
                 >
 
-                    {(isSameSender(messages, m, i, user._id)
-                        || isLastMessage(messages, i, user._id)
-                        || isLastMessage(messages, i, user._id)
-                    ) && (
-                            <Tooltip
-                                label={m.sender.name}
+                    {(isSameSender(messages, m, i, user._id) ||
+                        isLastMessage(messages, i, user._id)) && (
+                            <Tooltip label={m.sender.name}
                                 placement="bottom-start"
-                                hasArrow
-                            >
+                                hasArrow>
                                 <Avatar
                                     mt="7px"
                                     mr={1}
@@ -48,17 +44,16 @@ const ScrollableChat = ({ messages }) => {
                             padding: "5px 15px",
                             maxWidth: "75%",
                             marginLeft: isSameSenderMargin(messages, m, i, user._id),
-                            marginTop: isSameSender(messages, m, i, user._id) ? 3 : 10
+                            marginTop: isSameUser(messages, m, i, user._id) ? 3 : 10
                         }}
                     >
                         {m.content}
                         <div ref={messagesEndRef} />
                     </span>
-                    <div ref={messagesEndRef} />
                 </div>
             ))
             }
-        </div >
+        </div>
     )
 }
 

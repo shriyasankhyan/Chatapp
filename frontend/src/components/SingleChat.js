@@ -44,6 +44,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             setIsTyping(false)
         );
     }, [])
+
     // Receiving the message
     useEffect(() => {
         socket.on('message received', (newMessageRecieved) => {

@@ -22,7 +22,7 @@ const Chatpage = () => {
                 {user &&
                     (<MyChats fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
                     )}
-                {user && <ChatBox />}
+                {user && <ChatBox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />}
             </Box>
         </div>
     );
