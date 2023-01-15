@@ -13,7 +13,7 @@ import Lottie from "lottie-react";
 import animationData from "../animations/typing.json"
 import baseURL from '../baseURL';
 
-const ENDPOINT = 'http://localhost:5000';
+const ENDPOINT = 'https://chit-chat-shriya-sankhyan.onrender.com';
 var socket, selectedChatCompare;
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     const [messages, setMessages] = useState([]);
