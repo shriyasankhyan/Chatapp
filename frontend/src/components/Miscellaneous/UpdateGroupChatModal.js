@@ -79,7 +79,7 @@ const UpdateGroupChatModal = ({ fetchAgain, setFetchAgain, fetchMessages }) => {
                     Authorization: `Bearer ${user.token}`,
                 },
             };
-            const { data } = await axios.put(baseURL + "/api/chat/rename", {
+            const { data } = await axios.put(baseURL + "api/chat/rename", {
                 chatId: selectedChat._id,
                 chatName: groupChatName
             }, config);

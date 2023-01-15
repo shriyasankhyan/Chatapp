@@ -92,7 +92,7 @@ const Signup = () => {
                     "Content-type": "application/json",
                 },
             };
-            const { data } = await axios.post(baseURL + "/api/user",
+            const { data } = await axios.post(baseURL + "api/user",
                 { name, email, password, picture },
                 config
             );
