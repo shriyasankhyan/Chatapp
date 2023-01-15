@@ -6,6 +6,7 @@ const chatRoutes = require("./routes/chatRoutes");
 const { notFound, errorHandler } = require("./middlewares/errorMiddleware");
 const messageRoutes = require("./routes/messageRoutes");
 const app = express();
+const path = require('path');
 dotenv.config();
 
 
@@ -15,13 +16,27 @@ app.use(express.json()); // to accept JSON files.
 
 const PORT = process.env.PORT || 5000;
 
-app.get("/", (req, res) => {
-    res.send("API is running successfully");
-});
-
 app.use('/api/user', userRoutes);
 app.use('/api/chat', chatRoutes);
 app.use("/api/message", messageRoutes);
+
+// -------------------------Deployment-----------------------
+
+const __dirname1 = path.resolve();
+if (process.env.NODE_ENV === "production") {
+    // Establishing the path from current working directory to the build folder of our frontend. Run npm run build in frontend directory.
+    app.use(express.static(path.join(__dirname1, '/frontend/build')));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname1, "fronten", "build", "index.html"));
+    });
+} else {
+    app.get("/", (req, res) => {
+        res.send("API is running successfully");
+    });
+}
+
+// -------------------------Deployment-----------------------
 
 // Error handling middlewares
 app.use(notFound);
