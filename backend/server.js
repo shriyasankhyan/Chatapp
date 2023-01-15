@@ -10,7 +10,7 @@ const path = require('path');
 const cors = require('cors');
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'https://ornate-croissant-aee5b7.netlify.app',
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
