@@ -2,9 +2,8 @@ import {
     Box, Tooltip, Button, Text, Menu, MenuButton,
     MenuList, MenuItem, Avatar, MenuDivider, Drawer, useDisclosure,
     DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Input,
-    useToast
+    useToast, Spinner
 } from '@chakra-ui/react';
-import { Spinner } from "@chakra-ui/spinner";
 import UserListItem from "../UserAvatar/UserListItem"
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import React, { useState } from 'react'
