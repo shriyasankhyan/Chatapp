@@ -10,7 +10,7 @@ const path = require('path');
 const cors = require('cors');
 
 const corsOptions = {
-    origin: 'https://whimsical-basbousa-0c3ee2.netlify.app/',
+    origin: 'https://whimsical-basbousa-0c3ee2.netlify.app',
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 }
