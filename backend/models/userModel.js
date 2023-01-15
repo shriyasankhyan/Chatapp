@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    picture: { type: String, default: "http://res.cloudinary.com/dhh0y6yml/image/upload/v1673599046/pb1aenewvo6hm8vs9a0t.png" }
+    picture: { type: String, default: "https://res.cloudinary.com/dhh0y6yml/image/upload/v1673606857/hszlezjtxwkvkhaoq5ja.png" }
 }, {
     timestamps: true,
 });
