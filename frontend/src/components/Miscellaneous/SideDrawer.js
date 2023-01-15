@@ -52,7 +52,7 @@ const SideDrawer = () => {
                 }
             };
 
-            const { data } = await axios.get(baseURL + `/api/user?search=${search}`, config);
+            const { data } = await axios.get(baseURL + `api/user?search=${search}`, config);
             setLoading(false);
             setSearchResult(data);
         } catch (error) {
@@ -77,7 +77,7 @@ const SideDrawer = () => {
                 },
             };
 
-            const data = await axios.post(baseURL + '/api/chat', { userId }, config);
+            const data = await axios.post(baseURL + 'api/chat', { userId }, config);
 
             if (!chats.find(c => c._id === data._id)) {
                 setChats([data, ...chats]);
