@@ -28,7 +28,8 @@ const SideDrawer = () => {
     const logoutHandler = () => {
         localStorage.removeItem("userModel");
         navigate("/");
-    }
+    };
+
     const handleSearch = async () => {
         if (!search) {
             toast({

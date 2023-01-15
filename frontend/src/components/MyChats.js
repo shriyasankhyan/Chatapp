@@ -8,8 +8,8 @@ import ChatLoading from './Chats/ChatLoading'
 import asyncHandler from "express-async-handler";
 import GroupChatModal from './Miscellaneous/GroupChatModal';
 
-const MyChats = ({ fetchAgain, setFetchAgain }) => {
-    const [loggedUser, setLoggedUser] = useState();
+const MyChats = ({ fetchAgain }) => {
+    const [loggedUser, setLoggedUser] = useState("");
     const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
 
     const toast = useToast();
@@ -23,7 +23,7 @@ const MyChats = ({ fetchAgain, setFetchAgain }) => {
             };
 
             const { data } = await axios.get("/api/chat", config);
-            setChats(data)
+            setChats(data);
         } catch (error) {
             toast({
                 title: "Error occured!",
