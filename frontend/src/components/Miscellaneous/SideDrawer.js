@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import ChatLoading from "../Chats/ChatLoading"
 import axios from "axios";
 import Badge from 'react-badger';
+import baseURL from '../../baseURL';
 
 const SideDrawer = () => {
     const [search, setSearch] = useState("");
@@ -51,7 +52,7 @@ const SideDrawer = () => {
                 }
             };
 
-            const { data } = await axios.get(`/api/user?search=${search}`, config);
+            const { data } = await axios.get(baseURL + `/api/user?search=${search}`, config);
             setLoading(false);
             setSearchResult(data);
         } catch (error) {
@@ -76,7 +77,7 @@ const SideDrawer = () => {
                 },
             };
 
-            const data = await axios.post('/api/chat', { userId }, config);
+            const data = await axios.post(baseURL + '/api/chat', { userId }, config);
 
             if (!chats.find(c => c._id === data._id)) {
                 setChats([data, ...chats]);

@@ -2,6 +2,7 @@ import { useToast, FormControl, Button, FormLabel, VStack, Input, InputGroup, In
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import baseURL from '../../baseURL';
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -31,7 +32,7 @@ const Login = () => {
                     "Content-type": "application/json",
                 },
             };
-            const { data } = await axios.post("/api/user/login",
+            const { data } = await axios.post(baseURL + "/api/user/login",
                 { email, password },
                 config
             );

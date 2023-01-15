@@ -2,6 +2,7 @@ import { FormControl, Button, FormLabel, VStack, Input, InputGroup, InputRightEl
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
+import baseURL from '../../baseURL';
 
 
 const Signup = () => {
@@ -91,7 +92,7 @@ const Signup = () => {
                     "Content-type": "application/json",
                 },
             };
-            const { data } = await axios.post("/api/user",
+            const { data } = await axios.post(baseURL + "/api/user",
                 { name, email, password, picture },
                 config
             );

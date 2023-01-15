@@ -7,6 +7,7 @@ import axios from "axios";
 import ChatLoading from './Chats/ChatLoading'
 import asyncHandler from "express-async-handler";
 import GroupChatModal from './Miscellaneous/GroupChatModal';
+import baseURL from "../baseURL"
 
 const MyChats = ({ fetchAgain }) => {
     const [loggedUser, setLoggedUser] = useState("");
@@ -22,7 +23,7 @@ const MyChats = ({ fetchAgain }) => {
                 },
             };
 
-            const { data } = await axios.get("/api/chat", config);
+            const { data } = await axios.get(baseURL + "/api/chat", config);
             setChats(data);
         } catch (error) {
             toast({

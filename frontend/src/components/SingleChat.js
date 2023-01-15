@@ -11,6 +11,7 @@ import ScrollableChat from './ScrollableChat';
 import io from "socket.io-client";
 import Lottie from "lottie-react";
 import animationData from "../animations/typing.json"
+import baseURL from '../baseURL';
 
 const ENDPOINT = 'http://localhost:5000';
 var socket, selectedChatCompare;
@@ -70,7 +71,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 },
             };
             setLoading(true);
-            const { data } = await axios.get(`/api/message/${selectedChat._id}`, config);
+            const { data } = await axios.get(baseURL + `/api/message/${selectedChat._id}`, config);
 
             setMessages(data);
             setLoading(false);
@@ -109,7 +110,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
                 // So newMessage will still be pointing to the old message.
 
 
-                const { data } = await axios.post('/api/message', {
+                const { data } = await axios.post(baseURL + '/api/message', {
                     content: newMessage,
                     chatId: selectedChat._id
                 }, config);
