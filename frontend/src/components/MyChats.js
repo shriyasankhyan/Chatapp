@@ -8,7 +8,7 @@ import ChatLoading from './Chats/ChatLoading'
 import asyncHandler from "express-async-handler";
 import GroupChatModal from './Miscellaneous/GroupChatModal';
 
-const MyChats = ({ fetchAgain }) => {
+const MyChats = ({ fetchAgain, setFetchAgain }) => {
     const [loggedUser, setLoggedUser] = useState();
     const { selectedChat, setSelectedChat, user, chats, setChats } = ChatState();
 

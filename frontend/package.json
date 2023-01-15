@@ -6,6 +6,7 @@
   "dependencies": {
     "@chakra-ui/icons": "^2.0.16",
     "@chakra-ui/react": "^2.4.4",
+    "@emotion/css": "^11.10.5",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@testing-library/jest-dom": "^5.16.5",
@@ -15,9 +16,11 @@
     "framer-motion": "^8.0.1",
     "lottie-react": "^2.3.1",
     "react": "^18.2.0",
+    "react-badger": "^2.0.17",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.6.0",
     "react-scripts": "^5.0.1",
+    "react-scroll-to-bottom": "^4.2.0",
     "socket.io-client": "^4.5.4",
     "web-vitals": "^2.1.4"
   },

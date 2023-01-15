@@ -4,6 +4,7 @@ import {
     DrawerOverlay, DrawerContent, DrawerHeader, DrawerBody, Input,
     useToast, Spinner
 } from '@chakra-ui/react';
+import { getSender } from '../../config/ChatLogics';
 import UserListItem from "../UserAvatar/UserListItem"
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import React, { useState } from 'react'
@@ -12,13 +13,14 @@ import ProfileModal from './ProfileModal';
 import { useNavigate } from 'react-router-dom';
 import ChatLoading from "../Chats/ChatLoading"
 import axios from "axios";
+import Badge from 'react-badger';
 
 const SideDrawer = () => {
     const [search, setSearch] = useState("");
     const [searchResult, setSearchResult] = useState([]);
     const [loading, setLoading] = useState(false);
     const [loadingChat, setLoadingChat] = useState(false);
-    const { user, setSelectedChat, chats, setChats } = ChatState();
+    const { user, setSelectedChat, chats, setChats, notification, setNotification } = ChatState();
     const { isOpen, onOpen, onClose } = useDisclosure();
     const navigate = useNavigate();
     const toast = useToast();
@@ -121,10 +123,22 @@ const SideDrawer = () => {
                 </Text>
                 <div>
                     <Menu>
-                        <MenuButton p={1}>
+
+                        <MenuButton p={1} style={{ position: 'relative' }} >
                             <BellIcon fontSize="2xl" m="1" />
+                            {notification.length ? (< Badge anchor='topLeft' color='red' visible ><b>{notification.length}</b> </Badge>) : (<></>)}
                         </MenuButton>
-                        {/* <MenuList></MenuList> */}
+                        <MenuList pl={2}>
+                            {!notification.length && "No new messages"}
+                            {notification.map(not => (
+                                <MenuItem key={not._id} onClick={() => {
+                                    setSelectedChat(not.chat);
+                                    setNotification((notification.filter(n => n !== not)));
+                                }}>
+                                    {not.chat.isGroupChat ? `New message in ${not.chat.chatName}` : `New Message from ${getSender(user, not.chat.users)}`}
+                                </MenuItem>
+                            ))}
+                        </MenuList>
                     </Menu>
                     <Menu>
                         <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>

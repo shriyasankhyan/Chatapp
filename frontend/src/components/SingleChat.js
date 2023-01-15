@@ -10,14 +10,14 @@ import "./styles.css";
 import ScrollableChat from './ScrollableChat';
 import io from "socket.io-client";
 import Lottie from "lottie-react";
-import animationData from "../animations/typing.json";
+import animationData from "../animations/typing.json"
 
 const ENDPOINT = 'http://localhost:5000';
 var socket, selectedChatCompare;
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     const [messages, setMessages] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [newMessage, setNewMessage] = useState();
+    const [newMessage, setNewMessage] = useState("");
     const [socketConnected, setSocketConnected] = useState(false);
     const toast = useToast();
     const [isTyping, setIsTyping] = useState(false);
@@ -31,7 +31,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
         },
     };
 
-    const { user, selectedChat, setSelectedChat } = ChatState();
+    const { user, selectedChat, setSelectedChat, notification, setNotification } = ChatState();
 
     useEffect(() => {
         socket = io(ENDPOINT);
@@ -44,15 +44,19 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             setIsTyping(false)
         );
     }, [])
-
     // Receiving the message
     useEffect(() => {
         socket.on('message received', (newMessageRecieved) => {
             if (!selectedChatCompare || selectedChatCompare._id !== newMessageRecieved.chat._id) {
                 // Give notification
+                if (!notification.includes(newMessageRecieved)) {
+                    setNotification([newMessageRecieved, ...notification]);
+                    setFetchAgain(!fetchAgain);
+                }
+            } else {
+                // Add message into the opened list.
+                setMessages([...messages, newMessageRecieved]);
             }
-            // Add message into the opened list.
-            setMessages([...messages, newMessageRecieved]);
         })
     })
 
