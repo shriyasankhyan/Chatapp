@@ -2,7 +2,7 @@
 This is a MERN chat real time chatting web application built using SocketIO.
 
 ```bash
-git clone https://github.com/shriyasankhyan/Customer_Data_Management.git
+git clone https://github.com/shriyasankhyan/Chatapp.git
 ```
 
 
