@@ -27,7 +27,6 @@ const Signup = () => {
                 isClosable: true,
                 position: "bottom"
             });
-            console.log("I am in undefined");
             setLoading(false);
             return;
         }
